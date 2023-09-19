@@ -1,0 +1,16 @@
+/**
+    line-height = font-size * 1.1-3  - for headers
+    line-height = font-size * 1.3-5  - fro body
+
+    letter-spacing = -2%  - only for headers
+
+    if there is too much text in the body (>3 lines), align text to the left
+    However, dont make a mistake of having different allignment for header and body
+
+    50 - 75 chracters, 600 px width - only for body
+
+    stick to only 2 font sizes: to indicate hierarchy use color and weight 
+
+    make a spacing between UI elements based on their relationship, 2 paragraphs further away rasther header and body
+
+*/

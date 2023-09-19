@@ -76,3 +76,9 @@ export interface SearchStore {
     filtered : CocktailData[], 
     search : string,
 }
+
+export interface User {
+    username : string, 
+    email : string, 
+    password : string
+}

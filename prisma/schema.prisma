@@ -10,10 +10,12 @@ datasource db {
   url      = "file:./dev.sqlite"
 }
 
-
 model User {
   id    Int     @id @default(autoincrement())
+  name  String?                     //for some reason It must in this model
   email String  @unique
-  name  String?
+  username String
   password String
 }
+
+//npx prisma db push
