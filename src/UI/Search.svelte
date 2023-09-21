@@ -1,4 +1,7 @@
 <script>
+    import { enhance } from '$app/forms';
+
+    
     /** @type {import('$lib/types').FormResponse} */
     export let response;
 

@@ -1,14 +1,36 @@
 <script>
-    /** @type {import('./$types').PageData} */
-    export let data;
+    import { page } from '$app/stores';
+    import { enhance, applyAction } from '$app/forms';
+
+	/** @type {import('./$types').ActionData} */
+	export let form;
+
 </script>
 
 <div class="container">
     <h2>Login</h2>
-    <form class="login-form" action="?/login" method="post">
+    <form class="login-form "action="?/login" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
+
+        const email = formData.get('email');
+        if (!email) {
+            cancel();
+            alert('Email is required');
+            return;
+        }
+        
+
+        return async ({ result }) => {              //type, status, data
+            if (result.type == "redirect") {
+                applyAction(result)                 //goto() link from redirect in server
+            } else if (result.type == "failure") {
+                applyAction(result)                 //set $page.status to result.status which is error code
+            }
+        }
+        }}>
+
         <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="username">Email:</label>
+            <input type="text" id="email" name="email" required>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
@@ -17,19 +39,14 @@
         <div class="form-group">
             <input type="submit" value="Login">
         </div>
+
+        {#if $page.status == 401} <p class="response"> {form?.message} </p> {/if}
+        
     </form>
 </div>
 
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
-
     .container {
         background-color: #fff;
         max-width: 400px;

@@ -24,6 +24,7 @@
     
     const baseListings = data.cocktails
     const searchData = form?.data
+    console.log("here");
     drinks = mergeAndRemoveDuplicates(baseListings, searchData??[], "idDrink")
     searchStore = createSearchStore(drinks)  //can just make an update func and set data through it instead of creating in here
     
@@ -42,6 +43,7 @@
 </script>   
 
 <svelte:head>
+    <title>Cocktails display</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -97,8 +99,6 @@
         margin: 40px 0;
         border-radius: 10px;
     }
-
-    
 
     article {
         grid-column: span 2;

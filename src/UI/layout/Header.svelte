@@ -20,13 +20,13 @@
     </nav>
     <ul>
         <li>
-            <a href="register.html">
+            <a href="/register">
                 <i class="fa-solid fa-user-plus"></i>
                 Register
             </a>
         </li>
         <li>
-            <a href="login.html">
+            <a href="/login">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 Login
             </a>
