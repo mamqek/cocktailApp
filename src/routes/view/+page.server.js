@@ -42,20 +42,18 @@ export const actions = {
         const formData = await request.formData()
         const searchTerm = formData.get("searchTerm")
 
-        if (searchTerm === null) {
-            return false
-        }
+
 
         let searchTermString = searchTerm.toString()
 
-        // Check for so it contains only letters
-        const letterRegex = /^[A-Za-z\s]+$/;
-        if (!letterRegex.test(searchTermString)) {
-            return fail(400, {
-                message: "Error: Search term can not contain digits",
-                attributes : {searchTerm}
-            })
-        }
+        // // Check for so it contains only letters
+        // const letterRegex = /^[A-Za-z\s]+$/;
+        // if (!letterRegex.test(searchTermString)) {
+        //     return fail(400, {
+        //         message: "Error: Search term can not contain digits",
+        //         attributes : {searchTerm}
+        //     })
+        // }
 
         searchTermString = searchTermString.split(" ").join("_");            // Replace " " by "_" for link
 

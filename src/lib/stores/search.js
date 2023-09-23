@@ -7,15 +7,11 @@ export let searchStore;
  *  @param {import('$lib/types').CocktailData[]} data - The initial data for the store.
  *  @returns {import("svelte/store").Writable<import("$lib/types").SearchStore>} The search store.
 */
-export const createSearchStore = (data) => {
-    const searchProducts = data.map((cocktail) => ({
-        ...cocktail,
-        searchTerms : `${cocktail.strDrink} ${cocktail.strInstructions} ${cocktail.strCategory} ${cocktail.strAlcoholic}`
-    }));
-    
+export const createSearchStore = (data) => {        //data has to contain searchTerms => use addSearchTerms on data before 
+
     const store = writable({
-        data : searchProducts, 
-        filtered : searchProducts,
+        data : data, 
+        filtered : data,
         search : '',
     })
 
@@ -26,7 +22,6 @@ export const createSearchStore = (data) => {
 
 /** @param {import('$lib/types').SearchStore} storeAttr - The initial data for the store. */
 export const searchHandler = (storeAttr) => {
-    console.log("handle")
     const searchTerm = storeAttr.search.toLowerCase() || ""
     storeAttr.filtered = storeAttr.data.filter((cocktail) => {
         return cocktail.searchTerms.toLowerCase().includes(searchTerm)

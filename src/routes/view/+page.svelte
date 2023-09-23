@@ -1,42 +1,37 @@
 <script>
-    import { page } from '$app/stores';
     import CoctailCard from '../../components/CoctailCard.svelte';
     import Search from '../../UI/Search.svelte';
-    import {createSearchStore, searchHandler, updateStore} from '$lib/stores/search'
+    import {createSearchStore, searchHandler} from '$lib/stores/search'
     import { blur } from 'svelte/transition';
-    import { mergeAndRemoveDuplicates } from '$lib/scripts';
+    import { addSearchTerms } from '$lib/scripts';
 
     
     /** @type {import('$lib/types').DrinksList} */
 	export let data;
-    /** @type {import('$lib/types').FormResponse} */
     export let form;
+
 
     /** @type {import("svelte/store").Writable<import("$lib/types").SearchStore>} */
     let searchStore;
-    /** @type {import('$lib/types').CocktailData[]} */
-    let drinks;
-    /** @type {import('$lib/types').FormResponse} */
-    let searchResponse; 
+ 
+    
 
     
     
     
-    const baseListings = data.cocktails
-    const searchData = form?.data
-    console.log("here");
-    drinks = mergeAndRemoveDuplicates(baseListings, searchData??[], "idDrink")
-    searchStore = createSearchStore(drinks)  //can just make an update func and set data through it instead of creating in here
+    const baseCocktails = data.cocktails
+    const baseListings = addSearchTerms(baseCocktails)
+    searchStore = createSearchStore(baseListings)  //can just make an update func and set data through it instead of creating in here
     
     $: {
         searchHandler($searchStore)                             // filter when $searchStore.search changes
     }
 
-    searchResponse = form                                       //
+    // searchResponse = form                                       //
 
-    if (form?.attributes.searchTerm && searchData?.length) {
-        updateStore({ search: form.attributes.searchTerm });
-    }
+    // if (form?.attributes.searchTerm && searchData?.length) {
+    //     updateStore({ search: form.attributes.searchTerm });
+    // }
 
 
 
@@ -52,7 +47,8 @@
 <section>
     <h1>Coctail maker</h1>
 
-    <Search bind:response={searchResponse} store={searchStore}/>
+    <!-- <Search bind:response={searchResponse} store={searchStore}/> -->
+    <Search {form}/>
     <section class="content">
 
         <div class="cocktailList">

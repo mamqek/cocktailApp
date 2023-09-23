@@ -1,35 +1,46 @@
 <script>
-    import { enhance } from '$app/forms';
-
-    
-    /** @type {import('$lib/types').FormResponse} */
-    export let response;
-
-    /** @type {import("svelte/store").Writable<import("$lib/types").SearchStore>} */
-    export let store;
-
+    import { enhance, applyAction } from '$app/forms';
+    import { page } from '$app/stores';
+    import { mergeWithoutDuplicates, addSearchTerms } from '$lib/scripts';
+    import { searchStore, updateStore } from '$lib/stores/search';
     
 
-    
-    // if ($page.status == 400) {      //check for error in form response
-        // searchTerm = response.attributes.searchTerm
-    // }
+    /** @type {import('../routes/view/$types').ActionData} */       //path to /view as form returns from there
+    export let form;
 
+    // /** @type {import("svelte/store").Writable<import("$lib/types").SearchStore>} */
+    // export let store;
 
     // as an upgrade u could make so searchTerm is sent while still in searchBox, without pusghing the button. 
     // it would show when product doesnt exist
 </script>
 
 
-<form method="post">
-        <span class="search-container">
-            <input type="text" name="searchTerm" bind:value={$store.search} class="search-bar" placeholder="Search on the page...">
-            <button type="submit" class="search-button">Search the DB</button>
-        </span>
+<form method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
+    const searchTerm = formData.get("searchTerm")
+        if ( searchTerm === null) {
+            cancel();
+        }
 
-        <div class="response">
-            {#if response} <p> {response.message} </p> {/if}
-        </div>
+    return async ({result}) => {        
+        if (result.type == "success") {  
+            applyAction(result)                         //to update form as without it data will go directly in result
+            const fetchedData = result.data.data
+            const newListings = addSearchTerms(fetchedData)
+
+            const baseListings = $searchStore.data
+            const mergedData = mergeWithoutDuplicates(baseListings, newListings??[], "idDrink")
+            updateStore({ data: mergedData });
+        }  
+    }
+    }}>
+
+    <span class="search-container">
+        <input type="text" name="searchTerm" bind:value={$searchStore.search} class="search-bar" placeholder="Search on the page...">
+        <button type="submit" class="search-button">Search the DB</button>
+    </span>
+
+    {#if form} <p class="response"> {form.message} </p> {/if}
 </form>
 
 <style>
@@ -74,6 +85,7 @@
     }
 
     .response {
+        color: antiquewhite;
         display: flex;
         justify-content: center;
     }
