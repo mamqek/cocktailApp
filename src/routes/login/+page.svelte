@@ -8,8 +8,8 @@
 </script>
 
 <div class="container">
-    <h2>Login</h2>
-    <form class="login-form "action="?/login" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
+    <h2>Login</h2>                                                                                                                      
+    <form class="login-form "action="?/login" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {       //formElement, formData, action, cancel
 
         const email = formData.get('email');
         if (!email) {
@@ -17,7 +17,6 @@
             alert('Email is required');
             return;
         }
-        
 
         return async ({ result }) => {              //type, status, data
             if (result.type == "redirect") {
@@ -40,7 +39,7 @@
             <input type="submit" value="Login">
         </div>
 
-        {#if $page.status == 401} <p class="response"> {form?.message} </p> {/if}
+        {#if form} <p class="response"> {form?.message} </p> {/if}
         
     </form>
 </div>

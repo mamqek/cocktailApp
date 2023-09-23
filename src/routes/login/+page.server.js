@@ -1,14 +1,14 @@
+import { generateSessionID } from '$lib/scripts.js';
 import {prisma} from '$lib/server/prisma.js'
 import { fail, redirect } from '@sveltejs/kit';
-fail
+
 
 export const actions = {
-    login: async ({ request }) => {
+    login: async ({ request, locals, cookies }) => {
         const { email, password } = Object.fromEntries(await request.formData())
         
-        let user
         try {
-            user = await prisma.user.findUnique({
+            const user = await prisma.user.findUnique({
                 where: {
                   email,
                 },
@@ -16,6 +16,17 @@ export const actions = {
 
             if (user.password == password) {
                 console.log("Authorized");
+
+                const userID = user.id
+                const sessionID = generateSessionID()
+
+                await prisma.session.create({       //save sessionID in db
+                    data: {
+                        sessionID,
+                        userID
+                    },
+                })
+
             } else {
                 //goes to catch block
             }

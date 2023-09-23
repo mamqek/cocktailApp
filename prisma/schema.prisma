@@ -11,11 +11,19 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String?                     //for some reason It must in this model
-  email String  @unique
-  username String
-  password String
+  id        Int     @id @default(autoincrement())
+  name      String? //for some reason It must in this model
+  email     String  @unique
+  username  String
+  password  String
 }
+
+model Session {
+  id  String    @id @default(uuid())
+  sessionID   String @unique
+  userID      Int    
+  expiration  Int? 
+}
+
 
 //npx prisma db push

@@ -1,5 +1,8 @@
 <script>
+    import { enhance, applyAction } from "$app/forms";
+    import { page } from "$app/stores";
 
+    export let form
 </script>
 
 
@@ -7,7 +10,20 @@
 
 <div class="container">
     <h2>Registration</h2>
-    <form class="register-form" action="?/register" method="post">
+    <form class="register-form "action="?/register" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
+
+        if (formData.get("password") !== formData.get("confirm-password")) {
+            form = {message: "Passwords do not match"}            
+            cancel();
+            return;
+        }
+
+        return async ({result}) => {
+            applyAction(result)     //same logic as in login
+
+        }
+        }}>
+
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -21,8 +37,14 @@
             <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
+            <label for="password">Confirm password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+        <div class="form-group">
             <input type="submit" value="Register">
         </div>
+
+        {#if form} <p class="response"> {form.message} </p> {/if}
     </form>
 </div>
 

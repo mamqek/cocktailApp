@@ -4,7 +4,9 @@ import type { PrismaClient } from "@prisma/client"
 declare global {
 	namespace App {
 		interface Error {}
-		interface Locals {}
+		interface Locals {
+			sessionID : string
+		}
 		interface PageData {}
 		interface Platform {}
 	}
