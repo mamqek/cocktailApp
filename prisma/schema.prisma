@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // url      = "file:./dev.mysql"
 }
 
 model User {
@@ -16,14 +17,22 @@ model User {
   email     String  @unique
   username  String
   password  String
+  session Session[]
+
+  @@map("user")
 }
 
 model Session {
-  id  String    @id @default(uuid())
-  sessionID   String @unique
+  id          String @id @unique
   userID      Int    
-  expiration  Int? 
+  // active_expires BigInt
+  // idle_expires BigInt
+  user User @relation(references: [id], fields : [userID], onDelete : Cascade)
+
+  @@index([userID])
+  @@map("session")
 }
+
 
 
 //npx prisma db push

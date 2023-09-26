@@ -1,3 +1,4 @@
+import { generateSessionID } from '$lib/scripts.js';
 import {prisma} from '$lib/server/prisma.js'
 import { fail, redirect } from '@sveltejs/kit';
 
@@ -13,6 +14,21 @@ export const actions = {
                     email, 
                     username, 
                     password
+                },
+            })
+            console.log("here");
+            console.log(await prisma.session.findMany())
+
+
+            const userID = 1
+            console.log(userID);
+            const id = generateSessionID()
+
+            await prisma.session.create({       //save sessionID in db
+                data: {
+                    id,
+                    userID, 
+                    
                 },
             })
 

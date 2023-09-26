@@ -1,16 +1,15 @@
 <script>
     import { page } from '$app/stores';
     import { enhance, applyAction } from '$app/forms';
+    import Input from '../../components/Input.svelte';
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
 
 </script>
 
-<div class="container">
-    <h2>Login</h2>                                                                                                                      
+<body>
     <form class="login-form "action="?/login" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {       //formElement, formData, action, cancel
-
         const email = formData.get('email');
         if (!email) {
             cancel();
@@ -25,73 +24,114 @@
                 applyAction(result)                 //set $page.status to result.status which is error code
             }
         }
-        }}>
+    }}>
+        <h2>Login</h2>                                                                                                                      
 
-        <div class="form-group">
-            <label for="username">Email:</label>
-            <input type="text" id="email" name="email" required>
+        <Input name={"email"} type={"text"}/>
+
+        <Input name={"password"} type={"password"}/>
+
+        <div class="check">
+            <span>
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </span>
+            <a href="#">Forgot password</a>
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+    
+        <div class="inputBox">
+            <input type="submit" value="Sign In">
         </div>
-        <div class="form-group">
-            <input type="submit" value="Login">
-        </div>
+
+        <p>Don't have an account? <a href="#">Signup</a></p>
+        
 
         {#if form} <p class="response"> {form?.message} </p> {/if}
         
     </form>
-</div>
-
+</body>
 
 <style>
-    .container {
-        background-color: #fff;
-        max-width: 400px;
-        margin: 100px auto;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    body{
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #272b34;
     }
 
-    h2 {
-        color: #333;
+
+    form {
+        background: #29313c;
+        padding: 40px 50px 40px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 3px 5px #0aa1ff,
+        0 5px 10px #0aa1ff,
+        0 5px 30px #0aa1ff;
     }
 
-    .login-form {
-        text-align: left;
-    }
 
-    .form-group {
-            margin-bottom: 20px;
-        }
-        
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
-    input[type="submit"] {
-        background-color: #333;
+    form h2 {
         color: #fff;
-        padding: 10px 20px;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 1.25em;
+        letter-spacing: 0.1em;
+        margin-bottom: 30px;
+    }
+
+    .inputBox input[type='submit']{
+        background: var(--clr);
         border: none;
-        border-radius: 3px;
+        padding: 15px;
+        border-radius: 50px;
+        color: #1c2630;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         cursor: pointer;
+        box-shadow: 0 0 5px #0aa1ff;
+        font-size: 1.15em;
+        font-weight: 600;
+        transition: 0.5s;
     }
 
-    input[type="submit"]:hover {
-        background-color: #555;
+    .inputBox input[type='submit']:hover{
+        letter-spacing: 0.35em;
     }
 
+    .check{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        padding-bottom: 30px;
+        text-transform: uppercase;
+    }
+
+    .check input{
+        accent-color: var(--clr);
+        margin-right: 10px;
+    }
+
+
+    form p{
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    form p a{
+        color: var(--clr);
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    form a:hover{
+        text-decoration: underline;
+    }
 </style>

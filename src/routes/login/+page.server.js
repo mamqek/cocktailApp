@@ -18,9 +18,10 @@ export const actions = {
                 console.log("Authorized");
 
                 const userID = user.id
+                console.log(userID);
                 const sessionID = generateSessionID()
 
-                await prisma.session.create({       //save sessionID in db
+                await prisma.authentication.create({       //save sessionID in db
                     data: {
                         sessionID,
                         userID

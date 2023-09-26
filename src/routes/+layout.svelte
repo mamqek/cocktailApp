@@ -28,7 +28,7 @@
   <title>Coctail maker</title>
 </svelte:head>
 
-<body class="mb-48"> 
+<body> 
   
   <Header />
 
@@ -42,7 +42,12 @@
 
 <style>
   body {
-    
     background-color: #272b34;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
   }
 </style>
