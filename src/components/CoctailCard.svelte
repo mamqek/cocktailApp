@@ -22,7 +22,7 @@
 <style>
 .card {
   cursor: pointer; 
-  background-color: #D6D6D6; /* #E0E0E0 */
+  background-color: var(--button-clr); /* #E0E0E0 */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -42,6 +42,6 @@ img {
 
 h3 {
   font-size: 1.2rem;
-  color: #333;
+  color: var(--dark-text-clr);
 }
 </style>

@@ -1,5 +1,5 @@
 <footer class="footer">
-    <p>Copyright &copy; 2022, All Rights reserved</p>
+    <p>Copyright &copy; 2023, All Rights reserved</p>
     <a href="create.html">Post Job</a>
 </footer>
 

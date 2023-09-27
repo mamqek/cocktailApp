@@ -28,7 +28,7 @@
         <li>
             <a href="/login">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                Login
+                Sign in
             </a>
         </li>
     </ul>

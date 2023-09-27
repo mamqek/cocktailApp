@@ -19,10 +19,6 @@
 
 <style>
 
-    :root{
-        --clr: antiquewhite;
-    }
-
     .inputBox{
         position: relative;
         width: 300px;
@@ -36,8 +32,8 @@
         border: none;
         outline: none;
         background: transparent;
-        border-bottom: 2px solid #999;
-        color: #fff;
+        border-bottom: 2px solid var(--button-clr);
+        color: var(--light-text-clr);
         font-size: 1em;
         text-transform: uppercase;
         letter-spacing: 0.15em;
@@ -45,7 +41,7 @@
 
     .inputBox input:focus,
     .inputBox input:valid{
-        border-bottom: 2px solid var(--clr);
+        border-bottom: 2px solid var(--light-text-clr);
     }
 
     .inputBox label{
@@ -53,7 +49,7 @@
         left: 0;
         padding: 10px 0;
         pointer-events: none;
-        color: #999;
+        color: var(--light-text-clr);
         text-transform: uppercase;
     }
 
@@ -64,7 +60,7 @@
 
     .inputBox input:focus ~ label,
     .inputBox input:valid ~ label{
-        color: var(--clr);
+        color: var(--light-text-clr);
         letter-spacing: 0.2em;
         transform: translateY(-25px);
     }

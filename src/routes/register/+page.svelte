@@ -1,15 +1,14 @@
 <script>
     import { enhance, applyAction } from "$app/forms";
     import { page } from "$app/stores";
+    import Input from "../../components/Input.svelte";
 
     export let form
 </script>
 
 
 
-
-<div class="container">
-    <h2>Registration</h2>
+<body>
     <form class="register-form "action="?/register" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
 
         if (formData.get("password") !== formData.get("confirm-password")) {
@@ -24,30 +23,23 @@
         }
         }}>
 
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Confirm password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-        </div>
-        <div class="form-group">
+        <h2>Registration</h2>
+
+        <Input name={"username"} type={"text"}/>
+
+        <Input name={"email"} type={"text"}/>
+
+        <Input name={"password"} type={"password"}/>
+
+        <Input name={"confirm-password"} type={"password"}/>
+
+        <div class="inputBox">
             <input type="submit" value="Register">
         </div>
 
         {#if form} <p class="response"> {form.message} </p> {/if}
     </form>
-</div>
-
+</body>
 
 
 
@@ -56,60 +48,59 @@
 
 
 <style>
-    /* body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
+    body{
+        font-family: 'Bebas Neue', sans-serif;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--background-clr);
+    }
+
+    form {
+        background: var(--second-background-clr);
+        padding: 40px 50px 40px;
+        display: flex;
+        flex-direction: column;
         text-align: center;
-        margin: 0;
-        padding: 0;
+        border-radius: 10px;
+        box-shadow: 0 3px 5px var(--button-clr),
+        0 5px 10px var(--button-clr),
+        0 5px 30px var(--button-clr);
     }
-     */
-    .container {
-        background-color: #fff;
-        max-width: 400px;
-        margin: 100px auto;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    h2 {
-        color: #333;
+
+    form h2 {
+        color: var(--light-text-clr);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 1.5em;
+        letter-spacing: 0.2em;
+        margin: 0 0 30px 30px;
     }
     
     .register-form {
         text-align: left;
     }
     
-    .form-group {
-        margin-bottom: 20px;
-    }
-    
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-    
-    input[type="text"],
-    input[type="password"],
-    input[type="email"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-    
-    input[type="submit"] {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 20px;
+    .inputBox input[type='submit']{
+        position: relative;
+        width: 300px;
+        margin: 20px 0;
+        background: var(--button-clr);
         border: none;
-        border-radius: 3px;
+        padding: 15px;
+        border-radius: 50px;
+        color: var(--dark-text-clr);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         cursor: pointer;
+        box-shadow: 0 0 5px var(--light-text-clr);
+        font-size: 1.15em;
+        font-weight: 500;
+        transition: 0.5s;
     }
-    
-    input[type="submit"]:hover {
-        background-color: #555;
+
+    .inputBox input[type='submit']:hover{
+        letter-spacing: 0.35em;
     }
 </style>

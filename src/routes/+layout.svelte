@@ -44,7 +44,15 @@
   body {
     background-color: #272b34;
   }
-  
+  :root{
+    --link-clr: #0aa1ff;
+    --button-clr: #c2bab5;
+    --disabled-button-clr: #999;
+    --background-clr: #272b34;
+    --second-background-clr: #29313c;
+    --light-text-clr: antiquewhite;
+    --dark-text-clr: #1c2630;
+  }
   main {
     display: flex;
     flex-direction: column;

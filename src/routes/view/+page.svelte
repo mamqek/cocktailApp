@@ -54,8 +54,8 @@
         <div class="cocktailList">
 
             <br>
-            <h1 class="interface"> <strong> {$searchStore.data.length} </strong>   listings loaded on the page</h1>
-            <h1 class="interface"> <strong> {$searchStore.filtered.length} </strong>   listings match with your search</h1>
+            <h1 class="interface"> <strong> {$searchStore.data.length} </strong>&nbsp;&nbsp;listings loaded on the page</h1>
+            <h1 class="interface"> <strong> {$searchStore.filtered.length} </strong>&nbsp;&nbsp;listings match with your search</h1>
             <br>
 
             {#if !$searchStore.filtered.length}
@@ -90,9 +90,10 @@
         grid-column: span 2;
         display: flex;
         justify-content: center;
-        background-color: #D6D6D6;       /* #E0E0E0 */
+        background-color: var(--button-clr);       /* #E0E0E0 */
         padding: 10px 40px;
         margin: 40px 0;
+        font-weight: 300;
         border-radius: 10px;
     }
 
