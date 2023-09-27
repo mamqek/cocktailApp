@@ -36,7 +36,7 @@
         color: var(--light-text-clr);
         font-size: 1em;
         text-transform: uppercase;
-        letter-spacing: 0.15em;
+        /* letter-spacing: 0.15em; */
     }
 
     .inputBox input:focus,

@@ -3,6 +3,8 @@
     import { page } from '$app/stores';
     import { mergeWithoutDuplicates, addSearchTerms } from '$lib/scripts';
     import { searchStore, updateStore } from '$lib/stores/search';
+    import Message from '../components/Message.svelte';
+    
     
 
     /** @type {import('../routes/view/$types').ActionData} */       //path to /view as form returns from there
@@ -18,11 +20,11 @@
 
 <form method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
     const searchTerm = formData.get("searchTerm")
-        if ( searchTerm === null) {
+        if ( searchTerm === "") {
             cancel();
         }
 
-    return async ({result}) => {        
+    return async ({result}) => {     
         if (result.type == "success") {  
             applyAction(result)                         //to update form as without it data will go directly in result
             const fetchedData = result.data.data
@@ -31,7 +33,9 @@
             const baseListings = $searchStore.data
             const mergedData = mergeWithoutDuplicates(baseListings, newListings??[], "idDrink")
             updateStore({ data: mergedData });
-        }  
+        } else if (result.type == "failure") {
+            applyAction(result)                       
+        }
     }
     }}>
 
@@ -40,7 +44,7 @@
         <button type="submit" class="search-button">Search the DB</button>
     </span>
 
-    {#if form} <p class="response"> {form.message} </p> {/if}
+    <Message message={form?.message} timeout={7}/>
 </form>
 
 <style>
@@ -57,8 +61,8 @@
         max-width: 900px; /* You can adjust the max-width to your preference */
         margin: 0 auto;
         color: var(--dark-text-clr);
-        background-color: var(--button-clr);
-        border-radius: 7px;
+        background-color: var(--light-text-clr);
+        border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.333);
         overflow: hidden;
     }
@@ -88,10 +92,6 @@
         background-color: #ef3b2d;
     }
 
-    .response {
-        color: antiquewhite;
-        display: flex;
-        justify-content: center;
-    }
+
 
 </style>

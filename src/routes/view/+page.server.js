@@ -65,7 +65,10 @@ export const actions = {
         if (drinksData) {
             message = `Success! ${drinksData.length} listings found and added to the page`
         } else {
-            message = `Oh no! Nothing was found`
+            return fail(400, {
+                message: "Oh no! Nothing was found",
+                attributes : {searchTerm}
+            })
         }
 
         return {

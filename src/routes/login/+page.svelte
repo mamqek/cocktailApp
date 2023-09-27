@@ -2,6 +2,7 @@
     import { page } from '$app/stores';
     import { enhance, applyAction } from '$app/forms';
     import Input from '../../components/Input.svelte';
+    import Message from '../../components/Message.svelte';
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
@@ -44,10 +45,9 @@
         </div>
 
         <p>Don't have an account? &emsp;<a href="/register">Sign up</a></p>
-        <br>
-        <br>
-        {#if form} <p class="response"> {form?.message} </p> {/if}
-        
+
+        <Message message={form?.message} timeout={0}/>
+
     </form>
 </body>
 

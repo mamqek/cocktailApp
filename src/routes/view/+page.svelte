@@ -59,7 +59,7 @@
             <br>
 
             {#if !$searchStore.filtered.length}
-                <h1 class="counter interface">No data here</h1>
+                <h1 class="counter interface">No listings that match your search are loaded. <br> Try Search the DB</h1>
             {/if}
 
             {#each $searchStore.filtered as cocktail}
@@ -90,9 +90,9 @@
         grid-column: span 2;
         display: flex;
         justify-content: center;
-        background-color: var(--button-clr);       /* #E0E0E0 */
+        background-color: var(--light-text-clr);       /* #E0E0E0 */
         padding: 10px 40px;
-        margin: 40px 0;
+        margin: 10px 0 80px;
         font-weight: 300;
         border-radius: 10px;
     }
@@ -103,6 +103,8 @@
 
     .counter {
         grid-column: span 6;
+        text-align: center;
+
     }
 
 

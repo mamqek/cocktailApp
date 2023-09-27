@@ -2,6 +2,8 @@
     import { enhance, applyAction } from "$app/forms";
     import { page } from "$app/stores";
     import Input from "../../components/Input.svelte";
+    import Message from "../../components/Message.svelte";
+    
 
     export let form
 </script>
@@ -37,7 +39,7 @@
             <input type="submit" value="Register">
         </div>
 
-        {#if form} <p class="response"> {form.message} </p> {/if}
+        <Message message={form?.message} timeout={0}/>
     </form>
 </body>
 
@@ -75,7 +77,7 @@
         text-transform: uppercase;
         font-size: 1.5em;
         letter-spacing: 0.2em;
-        margin: 0 0 30px 30px;
+        margin: 0 auto 30px;
     }
     
     .register-form {
