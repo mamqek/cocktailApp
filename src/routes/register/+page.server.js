@@ -16,21 +16,6 @@ export const actions = {
                     password
                 },
             })
-            console.log("here");
-            console.log(await prisma.session.findMany())
-
-
-            const userID = 1
-            console.log(userID);
-            const id = generateSessionID()
-
-            await prisma.session.create({       //save sessionID in db
-                data: {
-                    id,
-                    userID, 
-                    
-                },
-            })
 
         } catch (err) {
             console.log(err)

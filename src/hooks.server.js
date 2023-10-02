@@ -1,24 +1,40 @@
-import { parse, serialize } from 'cookie';
+import {prisma} from '$lib/server/prisma'
 
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = async ({ event, resolve }) => {
-    console.log("handle");
     const cookies = event.cookies
-    const sessionID = cookies.get("auth") ?? ""
-    console.log(sessionID);
-    event.locals.sessionID = sessionID;
+    const sessionID = cookies.get("session") ?? ""
+
+    if (sessionID) {
+
+        try {
+
+            const session = await prisma.session.findUnique({
+                where: {
+                    id : sessionID,
+                },
+            });
+            
+            if (session) {
+
+                const user = await prisma.user.findUnique({
+                    where: {
+                        id : session.userID
+                    },
+                });
+
+                event.locals.session = session;
+                event.locals.user = user
+
+            }
+
+        } catch (err) {
+            console.log("Error in hook" + err)
+        }
+        
+    }
 
     const response = await resolve(event);
-
-    // if (event.locals.sessionChanged) {
-    //     console.log("cookie updated");
-    //     response.headers['set-cookie'] = serialize('session', JSON.stringify(event.locals.session), {
-    //         path: '/',
-    //         httpOnly: true,
-    //         // secure: true, // Uncomment this if using HTTPS
-    //         maxAge: 3600 // 1 hour
-    //     });
-    // }
 
     return response;
 };

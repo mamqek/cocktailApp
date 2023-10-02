@@ -4,7 +4,7 @@ import { log } from "console";
 export const load = async ({ fetch }) => {
 
     const fetchMainMenu = async () => {  
-        console.log("load")
+        
         const arrLabels = [
             'Margarita',
             'Mojito',

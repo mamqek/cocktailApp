@@ -4,27 +4,20 @@
     import {createSearchStore, searchHandler} from '$lib/stores/search'
     import { blur } from 'svelte/transition';
     import { addSearchTerms } from '$lib/scripts';
-
     
     /** @type {import('$lib/types').DrinksList} */
 	export let data;
     export let form;
 
-
     /** @type {import("svelte/store").Writable<import("$lib/types").SearchStore>} */
     let searchStore;
  
-    
-
-    
-    
-    
     const baseCocktails = data.cocktails
     const baseListings = addSearchTerms(baseCocktails)
     searchStore = createSearchStore(baseListings)  //can just make an update func and set data through it instead of creating in here
     
     $: {
-        searchHandler($searchStore)                             // filter when $searchStore.search changes
+        searchHandler($searchStore)      // filter when $searchStore.search changes                
     }
 
     // searchResponse = form                                       //
@@ -49,6 +42,7 @@
 
     <!-- <Search bind:response={searchResponse} store={searchStore}/> -->
     <Search {form}/>
+    
     <section class="content">
 
         <div class="cocktailList">

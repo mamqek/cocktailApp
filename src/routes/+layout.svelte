@@ -1,6 +1,16 @@
 <script>
 	import Header from '../UI/layout/Header.svelte';
 	import Footer from '../UI/layout/Footer.svelte';
+  //   import { updateStore } from '$lib/stores/session';
+
+  export let data
+ 
+  $: user  = data.user
+
+  // $: {
+  //   const { user } = data
+  //   updateStore({user : user})
+  // }
 </script>
 
 <svelte:head>
@@ -13,24 +23,20 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="//unpkg.com/alpinejs" defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              laravel: '#ef3b2d',
-            },
-          },
-        },
-      }
-  </script>
+
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css" 
+        integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+  />
 
   <title>Coctail maker</title>
 </svelte:head>
 
 <body> 
   
-  <Header />
+  <Header {user}/>
 
   <main>
     <slot />
@@ -47,6 +53,7 @@
   :root{
     --link-clr: #0aa1ff;
     --button-clr: #c2bab5;
+    --button-clr2: #770e07;
     --disabled-button-clr: #999;
     --background-clr: #272b34;
     --second-background-clr: #29313c;

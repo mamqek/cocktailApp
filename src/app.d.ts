@@ -5,7 +5,11 @@ declare global {
 	namespace App {
 		interface Error {}
 		interface Locals {
-			sessionID : string
+			session : {
+				id : string,
+				userID : number
+			}, 
+			user : {} | null
 		}
 		interface PageData {}
 		interface Platform {}

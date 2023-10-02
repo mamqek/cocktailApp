@@ -3,7 +3,6 @@
     import { page } from "$app/stores";
     import Input from "../../components/Input.svelte";
     import Message from "../../components/Message.svelte";
-    
 
     export let form
 </script>

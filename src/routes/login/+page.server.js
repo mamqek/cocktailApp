@@ -3,6 +3,7 @@ import {prisma} from '$lib/server/prisma.js'
 import { fail, redirect } from '@sveltejs/kit';
 
 
+
 export const actions = {
     login: async ({ request, locals, cookies }) => {
         const { email, password } = Object.fromEntries(await request.formData())
@@ -10,23 +11,29 @@ export const actions = {
         try {
             const user = await prisma.user.findUnique({
                 where: {
-                  email,
+                  email
                 },
             });
 
             if (user.password == password) {
-                console.log("Authorized");
-
+                
                 const userID = user.id
-                console.log(userID);
                 const sessionID = generateSessionID()
 
-                await prisma.authentication.create({       //save sessionID in db
-                    data: {
-                        sessionID,
+                await prisma.session.deleteMany({
+                    where: {
                         userID
                     },
+                });
+                
+                await prisma.session.create({       //save sessionID in db
+                    data: {
+                        id : sessionID,
+                        userID, 
+                    },
                 })
+
+                cookies.set("session", sessionID)
 
             } else {
                 //goes to catch block
@@ -37,7 +44,7 @@ export const actions = {
             return fail(401, {message: 'Authorization failed.'})
         }
 
-        throw redirect(303, "/view")
+        // throw redirect(303, "/view")
 
         // return {
         //     message : "Authorization successful.",

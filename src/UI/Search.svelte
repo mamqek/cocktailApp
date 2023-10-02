@@ -89,7 +89,7 @@
     }
 
     .search-button:hover {
-        background-color: #ef3b2d;
+        background-color: #9c2d2d;
     }
 
 

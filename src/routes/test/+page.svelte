@@ -4,7 +4,6 @@
     import Search from '../../UI/Search.svelte';
     import {createSearchStore, searchHandler, updateStore} from '$lib/stores/search'
     import { blur } from 'svelte/transition';
-    import { mergeAndRemoveDuplicates } from '$lib/scripts';
 
     
     // /** @type {import('$lib/types').DrinksList} */
@@ -26,6 +25,21 @@
 </svelte:head>
 
 <div class="container">
+
+    <div class="dick">
+        <div class="log">
+
+        </div>
+        <div class="eggs">
+            <div class="egg">
+
+            </div>
+
+            <div class="egg">
+
+            </div>
+        </div>
+    </div>
 
     <div class="menu">
 
@@ -98,6 +112,28 @@
 
 
 <style>
+    .dick {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .log {
+        height: 500px;
+        background-color: brown;
+        width: 100px;
+    }
+
+    .eggs {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .egg {
+        width: 200px;
+        height: 200px;
+        background-color: brown;
+    }
+    
 
     .container {
         padding: 40px 100px;
@@ -120,6 +156,7 @@
         color:#ccc;
         margin-bottom: 20px; /* Adjust the margin between items as needed */
         border: 1px solid #ccc;
-
     }
+
+
 </style>
