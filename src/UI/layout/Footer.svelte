@@ -16,7 +16,7 @@
     font-weight: bold;
     background-color: #272b34;
     color: white;
-    height: 6rem; 
+    height: 4rem; 
     margin-top: 6rem; 
     opacity: 0.9;
   }

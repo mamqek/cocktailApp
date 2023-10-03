@@ -22,9 +22,9 @@
 <style>
 .card {
   cursor: pointer; 
-  background-color: var(--button-clr); /* #E0E0E0 */
+  background-color: transparent; /* #E0E0E0 */
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.437);
   padding: 20px;
   text-align: center;
 }
@@ -36,12 +36,12 @@ img {
   display:block;
   margin: 0 auto;           /* Center horizontally */
 
-  border-radius: 8px;
+  border-radius: 50px;
   margin-bottom: 10px;
 }
 
 h3 {
   font-size: 1.2rem;
-  color: var(--dark-text-clr);
+  color: var(--light-text-clr);
 }
 </style>

@@ -58,7 +58,7 @@
 
             {#each $searchStore.filtered as cocktail}
                 <article transition:blur={{ delay: 200, duration: 500 }}>
-                    <CoctailCard bind:cocktail={cocktail} />
+                    <CoctailCard {cocktail} />
                 </article>
             {/each}
         </div>
@@ -68,7 +68,7 @@
 
 <style>
     .content {
-        padding: 40px 100px;
+        padding: 40px 300px;
         
         font-family: 'Bebas Neue', sans-serif;
     }
@@ -98,7 +98,6 @@
     .counter {
         grid-column: span 6;
         text-align: center;
-
     }
 
 

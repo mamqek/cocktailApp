@@ -51,8 +51,8 @@
     background-color: #272b34;
   }
   :root{
-    --link-clr: #0aa1ff;
-    --button-clr: #c2bab5;
+    --link-clr: #0aa1ff; 
+    --button-clr: #C49292;  /*c2bab5*/
     --button-clr2: #770e07;
     --disabled-button-clr: #999;
     --background-clr: #272b34;

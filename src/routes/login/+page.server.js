@@ -9,6 +9,7 @@ export const actions = {
         const { email, password } = Object.fromEntries(await request.formData())
         
         try {
+
             const user = await prisma.user.findUnique({
                 where: {
                   email
@@ -25,7 +26,7 @@ export const actions = {
                         userID
                     },
                 });
-                
+
                 await prisma.session.create({       //save sessionID in db
                     data: {
                         id : sessionID,
@@ -44,13 +45,7 @@ export const actions = {
             return fail(401, {message: 'Authorization failed.'})
         }
 
-        // throw redirect(303, "/view")
-
-        // return {
-        //     message : "Authorization successful.",
-        //     data : user         
-        // }
-
-
+        throw redirect(303, "/view")
+        
     }
 };

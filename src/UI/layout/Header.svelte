@@ -1,5 +1,6 @@
 <script>
     import icon from '$lib/images/icon.png'
+    import avatar from '$lib/images/avatar.png'
     import { page } from '$app/stores';
     
     let href
@@ -21,7 +22,7 @@
 <header>
 
     <nav>
-        <a href="{href}">
+        <a class="link" href="{href}">
             <img src={icon} alt="Icon" class="logo" />
         </a>
     </nav>
@@ -30,13 +31,13 @@
 
         <ul>
             <li>
-                <a href="/register">
+                <a  class="link" href="/register">
                     <i class="fa-solid fa-user-plus"></i>
                     Register
                 </a>
             </li>
             <li>
-                <a href="/login">
+                <a  class="link" href="/login">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i>
                     Sign in
                 </a>
@@ -48,13 +49,16 @@
         <nav class="profilenav">
             <a class="link" href="/profile">
                 <span class="profile">
-                    <img src={icon} alt="Profile" class="logo" />
+                    <img src={avatar} alt="Profile" class="avatar" />
                     <p>{user.username}</p>
                 </span>
             </a>
 
             <form action="/logout" method="POST">
-                <button class="logout link" type="submit" >Logout</button>
+                <button class="logout link" type="submit" >
+                    <i class="fa-solid fa-sign-out"></i>
+                    Logout
+                </button>
             </form>
         </nav>
 
@@ -74,7 +78,7 @@
     }
 
     .logo {
-        width: 80px;
+        width: 100px;
         height: auto;
         max-width: 100%; 
     }
@@ -97,18 +101,41 @@
     .profile {
         display: flex;
         align-items: center;
+        width: 140px;
+        min-width: none;
+        min-height: 60px;
+        position: relative;
+        background-color: #e94444;
+        border-radius: 12px;
+        color: var(--dark-text-clr);
+        font-family: 'Bebas Neue', sans-serif;
+
     }   
+
+    .profile p {
+        margin: 0 10px;
+        position: absolute;
+        right: 0;
+    }
+
+    .avatar {
+        border-radius: 40px;
+        width: 60px;
+        height: 60px;
+        max-width: 100%; 
+        position: absolute;
+        right: 100px;
+    }
     
     .link {
-        background-color: var(--button-clr);
         display: inline-block;
-        border-radius: 8px;
     }
 
     .logout {
         padding: 0 12px 4px;
-        background-color:  var(--button-clr2);
+        margin-right: 1rem; 
     }
+
 
 
 

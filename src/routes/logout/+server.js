@@ -12,7 +12,7 @@ export const POST = async ({ cookies, locals}) => {
 
         const deletedSession = await prisma.session.delete({
             where: {
-            id
+                id
             }
         })
 
