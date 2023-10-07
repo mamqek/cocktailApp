@@ -32,13 +32,13 @@
         <ul>
             <li>
                 <a  class="link" href="/register">
-                    <i class="fa-solid fa-user-plus"></i>
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
                     Register
                 </a>
             </li>
             <li>
                 <a  class="link" href="/login">
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
                     Sign in
                 </a>
             </li>
@@ -56,7 +56,7 @@
 
             <form action="/logout" method="POST">
                 <button class="logout link" type="submit" >
-                    <i class="fa-solid fa-sign-out"></i>
+                    <i class="fa-solid fa-sign-out" aria-hidden="true"></i>
                     Logout
                 </button>
             </form>
@@ -101,8 +101,7 @@
     .profile {
         display: flex;
         align-items: center;
-        width: 140px;
-        min-width: none;
+        width: 130px;
         min-height: 60px;
         position: relative;
         background-color: #e94444;
@@ -124,7 +123,7 @@
         height: 60px;
         max-width: 100%; 
         position: absolute;
-        right: 100px;
+        right: 90px;
     }
     
     .link {

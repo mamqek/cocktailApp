@@ -47,10 +47,8 @@
 
         <div class="cocktailList">
 
-            <br>
             <h1 class="interface"> <strong> {$searchStore.data.length} </strong>&nbsp;&nbsp;listings loaded on the page</h1>
             <h1 class="interface"> <strong> {$searchStore.filtered.length} </strong>&nbsp;&nbsp;listings match with your search</h1>
-            <br>
 
             {#if !$searchStore.filtered.length}
                 <h1 class="counter interface">No listings that match your search are loaded. <br> Try Search the DB</h1>
@@ -68,16 +66,15 @@
 
 <style>
     .content {
-        padding: 40px 300px;
-        
+        padding: 40px 350px;
         font-family: 'Bebas Neue', sans-serif;
     }
 
     .cocktailList {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-column-gap: 40px;
-        grid-row-gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 60px;
+        grid-row-gap: 60px;
     }
 
     .interface {
@@ -92,11 +89,11 @@
     }
 
     article {
-        grid-column: span 2;
+        grid-column: span 1;
     }
 
     .counter {
-        grid-column: span 6;
+        grid-column: span 4;
         text-align: center;
     }
 
