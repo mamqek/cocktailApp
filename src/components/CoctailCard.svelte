@@ -1,35 +1,47 @@
-
-
 <script>
-    import { slide } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
+  import { page } from '$app/stores';
+  import { enhance } from '$app/forms';
+  
+  /** @type {import('$lib/types').CocktailData} */
+  export let cocktail;
 
-    import { page } from '$app/stores';
-    
-    /** @type {import('$lib/types').CocktailData} */
-    export let cocktail;
+  let info = false
+  function handleClick() {
+    // if ($page.params.DrinkID != cocktail.idDrink) {    // So it does not redirect on the same page
+    //   window.location.href = `view/${cocktail.idDrink}`
+    // }
+    info = !info
+  }
 
-    let info = false
-    function handleClick() {
-      // if ($page.params.DrinkID != cocktail.idDrink) {    // So it does not redirect on the same page
-      //   window.location.href = `view/${cocktail.idDrink}`
-      // }
-      info = !info
-    }
+  function formClick() {
+      this.submit()
+  }
 
-    let ingredients = []
+  let ingredients = []
 
-for (let index = 1; index<=15; index++) {
+  for (let index = 1; index<=15; index++) {
     if (!cocktail["strIngredient"+index]) {
-        break
+      break
     }
 
     ingredients.push({
         ingredient : cocktail["strIngredient"+index], 
         measure : cocktail["strMeasure"+index]
     })
-}
+  }
+
 </script>
 
+<form method="POST" action="?/card" on:focus={formClick} on:click={formClick} use:enhance={({ formElement, formData, action, cancel }) => {
+    return async ({result}) => {
+      console.log(result);
+    }
+      
+}}>
+</form>
+
+<input type="submit">
 <div class="parent-container">
 <!-- svelte-ignore a11y-interactive-supports-focus -->
   <div role="link" class="card" on:click={handleClick} on:keypress={handleClick} >
@@ -41,22 +53,23 @@ for (let index = 1; index<=15; index++) {
 
   {#if info}
     <div class="card info" transition:slide={{axis : 'x'}}>
-      <div class="ingridients">
+      <div class="ingridients text-container">
         <h3>Ingridients</h3>
         <ul>
           {#each ingredients as ingredient}
-            <li>{ingredient.ingredient}</li>
+            <li class="text">{ingredient.ingredient}</li>
           {/each}
         </ul>
       </div>
-      <div class="instructions">
+      <!-- <div class="instructions text-container">
         <h3>Instructions</h3>
-        <p>{cocktail.strInstructions}</p>
-      </div>
+        <p class="text">{cocktail.strInstructions}</p>
+      </div> -->
     </div>
   {/if}
     
 </div>
+
 <style>
 
 .parent-container {
@@ -101,6 +114,22 @@ h3 {
   font-size: 1.4rem;
   color: var(--light-text-clr);
   margin-top: 5%;
+}
+
+.text-container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h3 {
+  margin-bottom: 5%;
+  text-decoration: underline;
+  font-size: 1.5rem;
+}
+
+.text {
+  font-size: 1.1rem;
 }
 
 

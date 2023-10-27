@@ -10,7 +10,7 @@
 
 
 <body>
-    <form class="register-form "action="?/register" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
+    <form class="register-form" action="?/register" method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
 
         if (formData.get("password") !== formData.get("confirm-password")) {
             form = {message: "Passwords do not match"}            

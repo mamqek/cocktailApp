@@ -18,7 +18,7 @@
 </script>
 
 
-<form method="POST" use:enhance={({ formElement, formData, action, cancel }) => {
+<form method="POST" action="?/search" use:enhance={({ formElement, formData, action, cancel }) => {
     const searchTerm = formData.get("searchTerm")
         if ( searchTerm === "") {
             cancel();

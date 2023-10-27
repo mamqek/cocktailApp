@@ -5,6 +5,7 @@
     import { blur } from 'svelte/transition';
     import { addSearchTerms } from '$lib/scripts';
     
+    
     /** @type {import('$lib/types').DrinksList} */
 	export let data;
     export let form;
@@ -25,7 +26,6 @@
     // if (form?.attributes.searchTerm && searchData?.length) {
     //     updateStore({ search: form.attributes.searchTerm });
     // }
-
 
 
 </script>   
@@ -56,7 +56,7 @@
 
             {#each $searchStore.filtered as cocktail}
                 <article transition:blur={{ delay: 200, duration: 500 }}>
-                    <CoctailCard {cocktail} />
+                    <CoctailCard {cocktail} bind:form={form}/>
                 </article>
             {/each}
         </div>

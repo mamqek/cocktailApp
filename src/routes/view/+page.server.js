@@ -37,7 +37,7 @@ export const load = async ({ fetch }) => {
 }
 
 export const actions = {
-    default: async ({request}) => {
+    search: async ({request}) => {
 
         const formData = await request.formData()
         const searchTerm = formData.get("searchTerm")
@@ -75,6 +75,13 @@ export const actions = {
             data: drinksData,
             attributes: {searchTerm},
             message : message
+        }
+    },
+
+    card: async ({request}) => {
+        console.log("here");
+        return {
+            message : "Success! Card was added to the page"
         }
     }
 }

@@ -10,7 +10,7 @@
         label.innerHTML = label.innerText.split('').map((letters, i) => `<span style="transition-delay: ${i * 50}ms" >${letters}</span>`).join('');
     })
 </script>
-
+    
 <div class="inputBox">
     <input type="{type}" id="{name}" name="{name}" required>
     <label bind:this={label} for="{name}">{name}</label>
